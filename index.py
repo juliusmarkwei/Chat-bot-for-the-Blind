@@ -52,8 +52,8 @@ def chat_ui():
             output = "Please type a message"
         return output, history
 
-    input_field = Textbox(lines=2, placeholder="Type your message here...", label=None)
-    output_field = Textbox(lines=2, label=None)
+    input_field = Textbox(lines=2, placeholder="Type your message here...", label=None)   # input field
+    output_field = Textbox(lines=2, label=None)       # output field
 
     chat_interface = gr.Interface(
         fn=send_message,
