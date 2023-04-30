@@ -25,6 +25,12 @@ Before running the application, the following Python modules need to be installe
 - pyjokes
 - requests
 ```
+
+Use the code below to install the dependencies needed for running the software:
+```
+pip install -r requirements.txt
+```
+
 ## Usage
 
 To start the virtual assistant, simply run the `run_voice_assitance()` function in the code. The assistant will greet you and ask for your command. You can speak any of the following commands:
