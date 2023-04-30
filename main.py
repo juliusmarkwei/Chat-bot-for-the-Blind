@@ -127,19 +127,19 @@ def process_command(command):
     if 'play' in command:
         command_play_music(command)
 
-    if 'time' in command:
+    elif 'time' in command:
         command_get_current_time(command)
 
-    if 'who is' in command:
+    elif 'who is' in command:
         command_search_wikipedia(command)
 
-    if 'joke' in command:
-        command_tell_joke
+    elif 'joke' in command:
+        command_tell_joke()
 
-    if 'news' in command:
+    elif 'news' in command:
         command_tell_news()
 
-    if 'how are you' in command:
+    elif 'how are you' in command:
         talk('I am doing great')
         print('I am doing great')
 
@@ -150,7 +150,6 @@ def process_command(command):
             pass
             response = chunk["text"]
         engine.say(response)
-
 
 def run_voice_assitance():
     greeting_message()
