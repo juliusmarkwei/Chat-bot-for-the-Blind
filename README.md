@@ -1,1 +1,1 @@
-# SE-Project
+## About the project files
