@@ -9,7 +9,7 @@ import json
 import pyaudio
 
 # Insert your POE api_key here
-API_KEY = poe.Client("H0tHBzAj0KkcP41OvZI7bw%3D%3D")
+API_KEY = poe.Client("-")
 
 # this code block initializes the speech recognition and text-to-speech engines
 # using the libraries SpeechRecognition and pyttsx3
@@ -131,7 +131,7 @@ def command_tell_news():
     params = {
         "country": "us",
         # Insert your api_key here
-        "apiKey": "ba1685589f294a28b15df670917523e1"
+        "apiKey": "-"
     }
 
     # Make an HTTP GET request to the API endpoint
