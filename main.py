@@ -4,21 +4,22 @@ import pywhatkit
 import poe
 import datetime
 import wikipedia
-import pyjokes
 import requests
 import json
 import pyaudio
 
-# Insert your api_key here
-API_KEY = poe.Client("-")
+# Insert your POE api_key here
+API_KEY = poe.Client("H0tHBzAj0KkcP41OvZI7bw%3D%3D")
 
 # this code block initializes the speech recognition and text-to-speech engines
+# using the libraries SpeechRecognition and pyttsx3
 listener = sr.Recognizer()
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id)
 
 
+# function to greet the user based on the time of day
 def greeting_message():
     hour = int(datetime.datetime.now().hour)
     if hour >= 0 and hour < 12:
@@ -34,11 +35,13 @@ def greeting_message():
     engine.runAndWait()
 
 
+# function to speak a given text using the text-to-speech engine
 def talk(text):
     engine.say(text)
     engine.runAndWait()
 
 
+# function to recognize user's voice command using microphone input
 def accept_command():
     try:
         with sr.Microphone() as source:
@@ -62,6 +65,7 @@ def accept_command():
     return command
 
 
+# function to ask the user if there are more commands to be processed
 def ask_more():
     engine.say('Is there anything you want me to help you with?')
     engine.runAndWait()
@@ -75,18 +79,21 @@ def ask_more():
         return False
 
 
+# This function plays the requested music on YouTube using the PyWhatKit library.
 def command_play_music(command):
     song = command.replace('play', '')
     talk('Playing ' + song)
     pywhatkit.playonyt('playing ' + song)
 
 
+# This function gets the current time and prints it to the console and speaks it using text-to-speech.
 def command_get_current_time(command):
     time = datetime.datetime.now().strftime('%I:%M %p')
     talk('The time is ' + time)
     print('The time is ' + time)
 
 
+# This function searches Wikipedia for information on a given person and returns a summary of the first two sentences
 def command_search_wikipedia(command):
     person = command.replace('who is', '')
     info = wikipedia.summary(person, 2)
@@ -94,19 +101,37 @@ def command_search_wikipedia(command):
     talk(info)
 
 
+# This function fetches a random dad joke from an API and prints it.
 def command_tell_joke():
-    joke = pyjokes.get_joke()
-    talk(joke)
+    # Set the API endpoint URL
+    url = "https://icanhazdadjoke.com/"
+
+    # Set the headers for the HTTP GET request
+    headers = {
+        "Accept": "application/json"
+    }
+
+    # Make an HTTP GET request to the API endpoint
+    response = requests.get(url, headers=headers)
+
+    # Parse the JSON response
+    data = json.loads(response.text)
+
+    # Print the joke
+    joke = data['joke']
     print(joke)
+    talk(joke)
 
 
+# This function called command_tell_news() which uses the NewsAPI to retrieve the top
+# headlines from the US and read them out loud using text-to-speech.
 def command_tell_news():
     # Set the API endpoint URL and parameters
     url = "https://newsapi.org/v2/top-headlines"
     params = {
         "country": "us",
         # Insert your api_key here
-        "apiKey": "-"
+        "apiKey": "ba1685589f294a28b15df670917523e1"
     }
 
     # Make an HTTP GET request to the API endpoint
@@ -123,6 +148,7 @@ def command_tell_news():
         engine.say(title)
 
 
+# function to process the user's voice command
 def process_command(command):
     if 'play' in command:
         command_play_music(command)
@@ -151,6 +177,8 @@ def process_command(command):
             response = chunk["text"]
         engine.say(response)
 
+
+# function to run the virtual assistant
 def run_voice_assitance():
     greeting_message()
     while True:
